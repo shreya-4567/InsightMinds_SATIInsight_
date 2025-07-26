@@ -1,4 +1,8 @@
 # SATIInsight: AI-Powered Talent Discovery & Mentorship Platform
+🌐 **Live Website**  
+👉 [Click here to explore the SATI Insight Platform](https://sati-insight.vercel.app/)
+
+---
 
 SATIInsight is a modern, AI-powered platform designed to bridge the gap between talented students and the professional world. It offers a comprehensive ecosystem for skill validation, talent discovery, and real-time communication, empowering students to showcase their abilities and enabling recruiters and mentors to find and connect with the right individuals. By leveraging generative AI, SATIInsight provides a dynamic, transparent, and supportive environment for career growth and networking.
 
