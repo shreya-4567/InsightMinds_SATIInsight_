@@ -1,0 +1,48 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // USERS
+    // Allow any authenticated user to read profiles (for the discover page).
+    // Allow a user to only write to their own profile.
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == userId;
+    }
+
+    // SKILLS: Only the user or the server (admin) can update their skill records
+    match /skills/{userId} {
+      allow read: if true; // public read allowed
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // PROOFS: Skill verification proofs
+    match /proofs/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // CREATIVE SHOWCASE
+    match /showcases/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // FEEDBACK
+    match /feedback/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // PUBLIC FEED (cached summaries / leaderboard)
+    match /publicFeed/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true; // Only server or admin
+    }
+
+    // Optional: Only authenticated users can list collections
+    match /{document=**} {
+      allow list: if request.auth != null;
+    }
+  }
+}
